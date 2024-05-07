@@ -1,12 +1,14 @@
-import express from "express"
-import { createProject, getProject, getProjects } from "../controllers/projectController.js"
-
-const router = express.Router()
-
-router.post("/create", createProject)
-
-router.get("/", getProjects)
-router.get("/:id", getProject)
+//import express from "express"
+//import { createProject, getProject, getProjects } from "../controllers/projectController.js"
+const express = require('express');
+const router = express.Router();
+const projectController = require('../controllers/projectController');
 
 
-export default router
+
+router.post("/create", projectController.createProject)
+
+router.get("/", projectController.getProjects)
+router.get("/:id", projectController.getProject)
+
+module.exports = router;

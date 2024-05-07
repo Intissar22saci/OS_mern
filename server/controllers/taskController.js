@@ -1,6 +1,8 @@
-import Task from "../models/task.js";
-
-export const createTask = async (req, res) => {
+//import Task from "../models/task.js";
+const Task = require('../models/task');
+//export const createTask = async (req, res) => {
+  module.exports = {
+    async  createTask(req, res) {
     try {
         const { title, description, stage, date } = req.body;
 
@@ -17,9 +19,9 @@ export const createTask = async (req, res) => {
         console.log(error)
         return res.status(400).json({ staus: false, message: error.message })
     }
-}
+},
 
-export const getTasks = async (req, res) => {
+ async  getTasks (req, res) {
     try {
         const {stage} = req.query;
         let query = {};
@@ -37,9 +39,9 @@ export const getTasks = async (req, res) => {
         console.log(error)
         return res.status(400).json({ status: false, message: error.message })
     }
-}
+},
 
-export const getTask = async (req, res) => {
+async getTask (req, res)  {
     try {
         const { id } = req.params
         const task = await Task.findById(id)
@@ -49,9 +51,9 @@ export const getTask = async (req, res) => {
         console.log(error)
         return res.status(400).json({ status: false, message: error.message })
     }
-}
+},
 
-export const updateTask = async (req, res) => {
+ async updateTask (req, res) {
     try {
         const { id } = req.params
         const { title, description, stage, date } = req.body
@@ -69,9 +71,9 @@ export const updateTask = async (req, res) => {
         console.log(error)
         return res.status(400).json({ staus: false, message: error.message })
     }
-}
+},
 
-export const duplicateTask = async (req, res) => {
+ async duplicateTask (req, res)  {
     try {
       const { id } = req.params;
       const task = await Task.findById(id);
@@ -93,10 +95,9 @@ export const duplicateTask = async (req, res) => {
     console.log(error);
     return res.status(400).json({ status: false, message: error.message });
   }
-};
+},
 
-
-export const deleteTask = async (req, res) => {
+  async  deleteTask (req, res) {
     try {
       const { id } = req.params;
       const { actionType } = req.query;
@@ -115,4 +116,6 @@ export const deleteTask = async (req, res) => {
       console.log(error);
       return res.status(400).json({ status: false, message: error.message });
     }
-  };
+  }
+
+  }

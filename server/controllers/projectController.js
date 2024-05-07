@@ -1,6 +1,8 @@
-import Project from "../models/project.js";
-
-export const createProject = async (req, res) => {
+//import Project from "../models/project.js";
+const Project=require('../models/project');
+//module.export  createProject = async (req, res) => {
+    module.exports = {
+        async  createProject(req, res) {
     try {
         const { title, description, stage, date } = req.body;
 
@@ -18,9 +20,9 @@ export const createProject = async (req, res) => {
         return res.status(400).json({ staus: false, message: error.message })
     }
 
-}
+},
 
-export const getProjects = async (req, res) => {
+  async getProjects (req, res)  {
     try {
         const {stage} = req.query;
         let query = {};
@@ -38,9 +40,9 @@ export const getProjects = async (req, res) => {
         console.log(error)
         return res.status(400).json({ status: false, message: error.message })
     }
-}
+},
 
-export const getProject = async (req, res) => {
+  async  getProject (req, res)  {
     try {
         const { id } = req.params
         const project = await Project.findById(id)
@@ -51,4 +53,4 @@ export const getProject = async (req, res) => {
         return res.status(400).json({ status: false, message: error.message })
     }
 }
-
+    }

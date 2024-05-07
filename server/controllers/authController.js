@@ -31,7 +31,13 @@ module.exports = {
 
   async profil(req, res) {
     try {
+
       const user = req.session.user;
+   
+    console.log(user);
+    console.log(user.uuid);
+    const userpro=user.uuid;
+    console.log(userpro);
       console.log(user);
       if (!user) {
         return res.status(401).json({ message: 'No session data found' });
