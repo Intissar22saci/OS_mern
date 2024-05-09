@@ -1,112 +1,112 @@
-import Task from "../models/task.js";
+const Task = require('../models/task');
 
-export const createTask = async (req, res) => {
+module.exports = {
+  async createTask(req, res) {
     try {
-        const { title, description, stage, date } = req.body;
+      const { title, description, stage, date } = req.body;
 
-        const task = await Task.create({
-            title,
-            description,
-            stage,
-            date,
-        })
+      const task = await Task.create({
+        title,
+        description,
+        stage,
+        date,
+      })
 
-        res.status(200).json({ status: true, task, message: "Task created successfully." })
+      res.status(200).json({ status: true, task, message: "Task created successfully." })
 
     } catch (error) {
-        console.log(error)
-        return res.status(400).json({ staus: false, message: error.message })
+      console.log(error)
+      return res.status(400).json({ staus: false, message: error.message })
     }
-}
+  },
 
-export const getTasks = async (req, res) => {
+  async getTasks(req, res) {
     try {
-        const {stage} = req.query;
-        let query = {};
+      const { stage } = req.query;
+      let query = {};
 
-        if (stage) {
-            query.stage = stage;
-        }
+      if (stage) {
+        query.stage = stage;
+      }
 
-        let queryResult = await Task.find(query)
+      let queryResult = await Task.find(query)
 
-        const tasks = queryResult
+      const tasks = queryResult
 
-        res.status(200).json({ staus: true, tasks })
+      res.status(200).json({ staus: true, tasks })
     } catch (error) {
-        console.log(error)
-        return res.status(400).json({ status: false, message: error.message })
+      console.log(error)
+      return res.status(400).json({ status: false, message: error.message })
     }
-}
+  },
 
-export const getTask = async (req, res) => {
+  async getTask(req, res) {
     try {
-        const { id } = req.params
-        const task = await Task.findById(id)
+      const { id } = req.params
+      const task = await Task.findById(id)
 
-        res.status(200).json({ status: true, task })
+      res.status(200).json({ status: true, task })
     } catch (error) {
-        console.log(error)
-        return res.status(400).json({ status: false, message: error.message })
+      console.log(error)
+      return res.status(400).json({ status: false, message: error.message })
     }
-}
+  },
 
-export const updateTask = async (req, res) => {
+  async updateTask(req, res) {
     try {
-        const { id } = req.params
-        const { title, description, stage, date } = req.body
+      const { id } = req.params
+      const { title, description, stage, date } = req.body
 
-        const task = await Task.findById(id)
+      const task = await Task.findById(id)
 
-        task.title = title
-        task.description = description
-        task.date = date
-        task.stage = stage
+      task.title = title
+      task.description = description
+      task.date = date
+      task.stage = stage
 
-        await task.save()
-        res.status(200).json({ status: true, message: 'Task updated successfully' })
+      await task.save()
+      res.status(200).json({ status: true, message: 'Task updated successfully' })
     } catch (error) {
-        console.log(error)
-        return res.status(400).json({ staus: false, message: error.message })
+      console.log(error)
+      return res.status(400).json({ staus: false, message: error.message })
     }
-}
+  },
 
-export const duplicateTask = async (req, res) => {
+  async duplicateTask(req, res) {
     try {
       const { id } = req.params;
       const task = await Task.findById(id);
-  
+
       const newTask = await Task.create({
         ...task,
         title: task.title + " - Duplicate",
       });
-  
+
       newTask.stage = task.stage;
-  
+
       await newTask.save();
 
 
       res
-      .status(200)
-      .json({ status: true, message: "Task duplicated successfully." });
-  } catch (error) {
-    console.log(error);
-    return res.status(400).json({ status: false, message: error.message });
-  }
-};
+        .status(200)
+        .json({ status: true, message: "Task duplicated successfully." });
+    } catch (error) {
+      console.log(error);
+      return res.status(400).json({ status: false, message: error.message });
+    }
+  },
 
-
-export const deleteTask = async (req, res) => {
+  async deleteTask(req, res) {
     try {
       const { id } = req.params;
       const { actionType } = req.query;
-  
+
       if (actionType === "delete") {
         await Task.findByIdAndDelete(id);
       } else if (actionType === "deleteAll") {
         await Task.deleteMany({ isTrashed: true });
       }
-  
+
       res.status(200).json({
         status: true,
         message: `Task Deleted successfully.`,
@@ -115,4 +115,6 @@ export const deleteTask = async (req, res) => {
       console.log(error);
       return res.status(400).json({ status: false, message: error.message });
     }
-  };
+  }
+
+}
