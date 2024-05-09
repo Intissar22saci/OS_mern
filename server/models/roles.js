@@ -13,7 +13,7 @@ const roleSchema = new Schema({
   created_by: { type: String },
   last_updated: { type: Date, default: Date.now },
   updated_by: { type: String }
-},{ collection: 'roles' });
+}, { collection: 'roles' });
 
 const Roles = mongoose.model('Roles', roleSchema);
 

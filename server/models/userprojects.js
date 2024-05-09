@@ -31,7 +31,7 @@ const userProjectSchema = new mongoose.Schema({
     required: true,
     maxlength: 100,
   },
-  
+
   role: {
     type: String,
     maxlength: 100,
@@ -48,7 +48,7 @@ const userProjectSchema = new mongoose.Schema({
     type: String,
     maxlength: 100,
   },
-  
+
   last_created: {
     type: Date,
     default: Date.now,
@@ -65,7 +65,7 @@ const userProjectSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-},{ collection: 'user_projects' });
+}, { collection: 'user_projects' });
 
 const UserProjects = mongoose.model('UserProjects', userProjectSchema);
 

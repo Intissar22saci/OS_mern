@@ -1,8 +1,12 @@
-//import mongoose, { Schema } from "mongoose";
+
 const mongoose = require('mongoose');
-const taskSchema =  new mongoose.Schema({
+
+const taskSchema = new mongoose.Schema({
+
+//import mongoose, { Schema } from "mongoose";
+
     title: { type: String, required: true },
-    description: { type: String, required: false},
+    description: { type: String, required: false },
     date: { type: Date, required: true },
     stage: {
         type: String,

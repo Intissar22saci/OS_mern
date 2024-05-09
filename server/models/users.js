@@ -52,7 +52,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-} ,{ collection: 'users' });
+}, { collection: 'users' });
 
 const Users = mongoose.model('Users', userSchema);
 
