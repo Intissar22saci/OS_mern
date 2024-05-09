@@ -1,6 +1,10 @@
+
 const mongoose = require('mongoose');
 
 const taskSchema = new mongoose.Schema({
+
+//import mongoose, { Schema } from "mongoose";
+
     title: { type: String, required: true },
     description: { type: String, required: false },
     date: { type: Date, required: true },
