@@ -25,8 +25,8 @@ app.use(bodyParser.json());
 
 app.use('/api', userRoutes);
 app.use('/api', authRoutes);
-app.use('/api', taskRoutes);
-app.use('/api', projectRoutes);
+app.use('/api/task', taskRoutes);
+app.use('/api/project', projectRoutes);
 
 app.listen(5000, () => {
   console.log('Server running on port 5000');

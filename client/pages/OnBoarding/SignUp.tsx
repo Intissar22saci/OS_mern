@@ -17,6 +17,10 @@ const SignUp: React.FC = () => {
 
   // Function to handle form submission
   const handleSubmit = async () => {
+    if (password !== confirmPassword) {
+      console.log('Passwords do not match');
+      return;
+    }
 
     const formData = JSON.parse(sessionStorage.getItem('formData') || '{}');
     const growthGoalsData = JSON.parse(sessionStorage.getItem('growthGoalsData') || '{}');
@@ -27,6 +31,7 @@ console.log(growthGoalsData.selectedOptions[0])
     let businessModel = formData.selectedOption;
     if (formData.selectedOption === 'other') {
       businessModel = formData.otherDescription;
+      formData.selectedOption = businessModel;
     }console.log(businessModel)
     const signUpData = {
        ...formData,

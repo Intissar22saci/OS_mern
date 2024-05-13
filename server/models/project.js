@@ -1,8 +1,8 @@
-
+//import mongoose, { Schema } from "mongoose";
 const mongoose = require('mongoose');
-
-
 const projectSchema = new mongoose.Schema({
+    userpro:{  type: String,
+        required: true},
     title: { type: String, required: true },
     date: { type: Date, required: true },
     stage: {
@@ -16,4 +16,4 @@ const projectSchema = new mongoose.Schema({
 
 const Project = mongoose.model("Project", projectSchema)
 
-module.exports = Project;
+module.exports =Project;
