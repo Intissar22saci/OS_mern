@@ -1,9 +1,12 @@
+//login.tsx
 import React, { useState } from 'react';
+import Home from './home';
 
-const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const Login: React.FC = () => {
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -15,6 +18,7 @@ const Login = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, password }),
+        credentials: 'include',
       });
 
       if (!response.ok) {
@@ -23,12 +27,19 @@ const Login = () => {
       }
 
       const data = await response.json();
+      console.log(data);
       localStorage.setItem('token', data.token);
       setError('');
+      setLoggedIn(true);
+
     } catch (error: unknown) {
       setError((error as Error).message);
     }
   };
+
+  if (loggedIn) {
+    return <Home />;
+  }
 
   return (
     <form onSubmit={handleSubmit}>
