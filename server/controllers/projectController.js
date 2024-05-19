@@ -11,14 +11,16 @@ const Project=require('../models/project');
     const userpro=user.uuid;
     console.log(userpro);
     try {
-        const { title, description, stage, date } = req.body;
+       // const { title, description, stage, date } = req.body;
+        const { title,description } = req.body;
+
 
         const project = await Project.create({
             userpro,
             title,
             description,
-            stage,
-            date,
+          //  stage,
+            date:'12/12/2024'
         })
         
         res.status(200).json({ status: true, project, message: "Project created successfully." })

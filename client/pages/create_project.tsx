@@ -11,12 +11,13 @@ const CreateProject = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:5000/api/projects', {
+      const response = await fetch('http://localhost:5000/api/project/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ title, description, date, state }),
+        credentials: 'include',
       });
 
       if (!response.ok) {
